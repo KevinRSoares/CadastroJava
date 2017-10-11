@@ -19,6 +19,7 @@ public class viewCadastro extends javax.swing.JFrame {
      */
     public viewCadastro() {
         initComponents();
+        preencherComboBoxCategorias();
     }
     private void preencherComboBoxCategorias(){
         CategoriaDAO catDao = new CategoriaDAO();
@@ -68,14 +69,44 @@ public class viewCadastro extends javax.swing.JFrame {
         jButtonExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonExcluir.setForeground(new java.awt.Color(0, 0, 102));
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+        jButtonExcluir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonExcluirKeyPressed(evt);
+            }
+        });
 
         jButtonAtualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonAtualizar.setForeground(new java.awt.Color(0, 0, 102));
         jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+        jButtonAtualizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonAtualizarKeyPressed(evt);
+            }
+        });
 
         jButtonCadastrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonCadastrar.setForeground(new java.awt.Color(0, 0, 102));
         jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
+        jButtonCadastrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCadastrarKeyPressed(evt);
+            }
+        });
 
         jTextFieldDesc.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTextFieldDesc.setForeground(new java.awt.Color(0, 0, 102));
@@ -148,6 +179,7 @@ public class viewCadastro extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jTableProdutos.setBorder(new javax.swing.border.SoftBevelBorder(0));
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -197,6 +229,44 @@ public class viewCadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        salvar();
+    }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        atualizar();
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCadastrarKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER){
+            salvar();
+        }
+    }//GEN-LAST:event_jButtonCadastrarKeyPressed
+
+    private void jButtonAtualizarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAtualizarKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER){
+            atualizar();
+        }
+    }//GEN-LAST:event_jButtonAtualizarKeyPressed
+
+    private void jButtonExcluirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonExcluirKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER){
+            excluir();
+        }
+    }//GEN-LAST:event_jButtonExcluirKeyPressed
+    private void salvar(){
+        
+    }
+    private void atualizar(){
+        
+    }
+    private void excluir(){
+        
+    }
     /**
      * @param args the command line arguments
      */
