@@ -84,8 +84,6 @@ public class ProdutoDAO {
         } finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return produtos;
-        
-    }
-    
+        return produtos;  
+    }    
 }
