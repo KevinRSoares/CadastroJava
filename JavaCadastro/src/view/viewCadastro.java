@@ -5,21 +5,44 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
 import model.bean.Categoria;
+import model.bean.Produto;
 import model.dao.CategoriaDAO;
+import model.dao.ProdutoDAO;
 
 /**
  *
  * @author Administrador
  */
 public class viewCadastro extends javax.swing.JFrame {
-
+    private DefaultTableModel dtmProdutos;
     /**
      * Creates new form viewCadastro
      */
     public viewCadastro() {
         initComponents();
         preencherComboBoxCategorias();
+        dtmProdutos = (DefaultTableModel) jTableProdutos.getModel();
+        preencherTabelaProduto();
+    }
+    private void preencherTabelaProduto(){
+        ProdutoDAO pDAO = new ProdutoDAO();
+        int idProduto = 0;
+        String desProduto = "";
+        int quantidade = 0;
+        double valor = 0.0d;
+        int idCategoria = 0;
+        dtmProdutos.setRowCount(0);//reseta a tabela (limpa)
+        for(Produto p : pDAO.findAll()){
+            idProduto = p.getIdProduto();
+            desProduto = p.getDescricao();
+            quantidade = p.getQtd();
+            valor = p.getValor();
+            idCategoria = p.getCategoria().getIdCategoria();
+            Object[] dados = {idProduto,desProduto,quantidade,valor,idCategoria};
+            dtmProdutos.addRow(dados);
+        }
     }
     private void preencherComboBoxCategorias(){
         CategoriaDAO catDao = new CategoriaDAO();
@@ -45,7 +68,7 @@ public class viewCadastro extends javax.swing.JFrame {
         jButtonCadastrar = new javax.swing.JButton();
         jTextFieldDesc = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldValor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxCategorias = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -115,8 +138,8 @@ public class viewCadastro extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText("Descrição");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 102));
+        jTextFieldValor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTextFieldValor.setForeground(new java.awt.Color(0, 0, 102));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 102));
@@ -148,7 +171,7 @@ public class viewCadastro extends javax.swing.JFrame {
                             .addComponent(jTextFieldQtd))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -168,7 +191,7 @@ public class viewCadastro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
@@ -179,7 +202,8 @@ public class viewCadastro extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jTableProdutos.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jTableProdutos.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jTableProdutos.setForeground(new java.awt.Color(0, 0, 102));
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -314,8 +338,8 @@ public class viewCadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProdutos;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldDesc;
     private javax.swing.JTextField jTextFieldQtd;
+    private javax.swing.JTextField jTextFieldValor;
     // End of variables declaration//GEN-END:variables
 }
