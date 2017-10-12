@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Categoria;
 import model.bean.Produto;
@@ -22,8 +23,8 @@ public class viewCadastro extends javax.swing.JFrame {
      */
     public viewCadastro() {
         initComponents();
-        preencherComboBoxCategorias();
         dtmProdutos = (DefaultTableModel) jTableProdutos.getModel();
+        preencherComboBoxCategorias();
         preencherTabelaProduto();
     }
     private void preencherTabelaProduto(){
@@ -35,6 +36,23 @@ public class viewCadastro extends javax.swing.JFrame {
         int idCategoria = 0;
         dtmProdutos.setRowCount(0);//reseta a tabela (limpa)
         for(Produto p : pDAO.findAll()){
+            idProduto = p.getIdProduto();
+            desProduto = p.getDescricao();
+            quantidade = p.getQtd();
+            valor = p.getValor();
+            idCategoria = p.getCategoria().getIdCategoria();
+            Object[] dados = {idProduto,desProduto,quantidade,valor,idCategoria};
+            dtmProdutos.addRow(dados);
+        }
+    }
+    private void preencherTabelaProduto(int idCategoria){
+        ProdutoDAO pDAO = new ProdutoDAO();
+        int idProduto = 0;
+        String desProduto = "";
+        int quantidade = 0;
+        double valor = 0.0d;
+        dtmProdutos.setRowCount(0);//reseta a tabela (limpa)
+        for(Produto p : pDAO.findAll(idCategoria)){
             idProduto = p.getIdProduto();
             desProduto = p.getDescricao();
             quantidade = p.getQtd();
@@ -144,6 +162,12 @@ public class viewCadastro extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 102));
         jLabel3.setText("Valor");
+
+        jComboBoxCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCategoriasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -282,6 +306,14 @@ public class viewCadastro extends javax.swing.JFrame {
             excluir();
         }
     }//GEN-LAST:event_jButtonExcluirKeyPressed
+
+    private void jComboBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriasActionPerformed
+        Categoria cat = new Categoria();
+        //casting de (categotia)
+        cat = (Categoria)jComboBoxCategorias.getSelectedItem();
+        //JOptionPane.showMessageDialog(null, cat);
+        preencherTabelaProduto(cat.getIdCategoria());  
+    }//GEN-LAST:event_jComboBoxCategoriasActionPerformed
     private void salvar(){
         
     }
