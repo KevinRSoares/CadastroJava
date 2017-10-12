@@ -309,10 +309,14 @@ public class viewCadastro extends javax.swing.JFrame {
 
     private void jComboBoxCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriasActionPerformed
         Categoria cat = new Categoria();
-        //casting de (categotia)
-        cat = (Categoria)jComboBoxCategorias.getSelectedItem();
-        //JOptionPane.showMessageDialog(null, cat);
-        preencherTabelaProduto(cat.getIdCategoria());  
+            //casting de (categotia)
+            cat = (Categoria)jComboBoxCategorias.getSelectedItem();
+        if(cat.getIdCategoria() == 0){
+            preencherTabelaProduto();
+        }else{
+            //JOptionPane.showMessageDialog(null, todas);
+            preencherTabelaProduto(cat.getIdCategoria());
+        }
     }//GEN-LAST:event_jComboBoxCategoriasActionPerformed
     private void salvar(){
         
