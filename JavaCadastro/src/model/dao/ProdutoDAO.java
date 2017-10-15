@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.bean.Categoria;
 import model.bean.Produto;
 
@@ -123,6 +124,24 @@ public class ProdutoDAO {
         }
         return produtos;
         
+    }
+    public boolean dell(Produto produto){
+        String sql = "DELETE from produto WHERE idProduto = ?";
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, produto.getIdProduto());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Produto excluído com sucesso");
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao excluir o Produto");
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
     
 }

@@ -280,15 +280,46 @@ public class viewCadastro extends javax.swing.JFrame {
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         salvar();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
+    private void salvar(){
+        String desc = jTextFieldDesc.getText();
+        int qtd = Integer.parseInt(jTextFieldQtd.getText());
+        double valor = Double.parseDouble(jTextFieldValor.getText());
+        Categoria categoria = new Categoria();
+        categoria.setIdCategoria(1);
+        Produto p = new Produto();
+        ProdutoDAO dao = new ProdutoDAO();
+        p.setDescricao(desc);
+        p.setQtd(qtd);
+        p.setValor(valor);
+        p.setCategoria(categoria);
+        dao.save(p);
+        preencherTabelaProduto();
+    }
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         atualizar();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
-
+    private void atualizar(){
+        int linhaSelecionada = jTableProdutos.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            int id = (int) dtmProdutos.getValueAt(linhaSelecionada, 0);
+            
+            Produto p = new Produto();
+            ProdutoDAO dao = new ProdutoDAO();
+            p.setIdProduto(id);
+            
+            dao.dell(p);
+            preencherTabelaProduto();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um aluno para excluir");
+        }
+    }
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         excluir();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
+    private void excluir(){
+        
+    }
     private void jButtonCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCadastrarKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER){
             salvar();
@@ -318,15 +349,7 @@ public class viewCadastro extends javax.swing.JFrame {
             preencherTabelaProduto(cat.getIdCategoria());
         }
     }//GEN-LAST:event_jComboBoxCategoriasActionPerformed
-    private void salvar(){
-        
-    }
-    private void atualizar(){
-        
-    }
-    private void excluir(){
-        
-    }
+
     /**
      * @param args the command line arguments
      */
