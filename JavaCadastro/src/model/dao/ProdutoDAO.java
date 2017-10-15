@@ -42,6 +42,7 @@ public class ProdutoDAO {
             stmt.setDouble(3, produto.getValor());
             stmt.setInt(4, produto.getCategoria().getIdCategoria());
             stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
             return true;
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex);

@@ -299,6 +299,13 @@ public class viewCadastro extends javax.swing.JFrame {
         atualizar();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
     private void atualizar(){
+        
+    }
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void excluir(){
         int linhaSelecionada = jTableProdutos.getSelectedRow();
         if (linhaSelecionada != -1) {
             int id = (int) dtmProdutos.getValueAt(linhaSelecionada, 0);
@@ -312,13 +319,6 @@ public class viewCadastro extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um aluno para excluir");
         }
-    }
-    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        excluir();
-    }//GEN-LAST:event_jButtonExcluirActionPerformed
-
-    private void excluir(){
-        
     }
     private void jButtonCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCadastrarKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER){
