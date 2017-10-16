@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Categoria;
@@ -251,6 +252,16 @@ public class viewCadastro extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdutosMouseClicked(evt);
+            }
+        });
+        jTableProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTableProdutosKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -294,6 +305,7 @@ public class viewCadastro extends javax.swing.JFrame {
         p.setCategoria(categoria);
         dao.save(p);
         preencherTabelaProduto();
+        limpaCampos();
     }
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         atualizar();
@@ -304,7 +316,12 @@ public class viewCadastro extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         excluir();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
-
+    private void limpaCampos() {
+        jTextFieldDesc.setText("");
+        jTextFieldQtd.setText("");
+        jTextFieldValor.setText("");
+        jTextFieldDesc.requestFocus();
+    } 
     private void excluir(){
         int linhaSelecionada = jTableProdutos.getSelectedRow();
         if (linhaSelecionada != -1) {
@@ -350,6 +367,37 @@ public class viewCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxCategoriasActionPerformed
 
+    private void jTableProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableProdutosKeyReleased
+        
+    }//GEN-LAST:event_jTableProdutosKeyReleased
+
+    private void jTableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosMouseClicked
+        int linhaSelecionade = jTableProdutos.getSelectedRow();
+        String desc;
+        String qtd;
+        String valor;
+        if(linhaSelecionade != -1){
+            desc = dtmProdutos.getValueAt(linhaSelecionade, 1).toString();
+            qtd = dtmProdutos.getValueAt(linhaSelecionade, 2).toString();
+            valor = dtmProdutos.getValueAt(linhaSelecionade, 3).toString();
+            
+            
+            jTextFieldDesc.setText(desc);
+            jTextFieldQtd.setText(qtd);
+            jTextFieldValor.setText(valor);
+        }
+        focusrequest();
+    }//GEN-LAST:event_jTableProdutosMouseClicked
+
+    private void focusrequest(){
+        if(jTableProdutos.getSelectedColumn() == 1){
+            jTextFieldDesc.requestFocus();
+        }else if(jTableProdutos.getSelectedColumn() == 2){
+            jTextFieldQtd.requestFocus();
+        }else if(jTableProdutos.getSelectedColumn() == 3){
+            jTextFieldValor.requestFocus();
+        } 
+    }
     /**
      * @param args the command line arguments
      */
